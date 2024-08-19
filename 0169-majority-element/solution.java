@@ -3,13 +3,11 @@ class Solution {
         int a=nums[0];
         int c=1;
         for(int i=1;i<nums.length;i++){
-            if(c==0)
-            {
+            if(c==0){
                 a=nums[i];
                 c=1;
             }
-            else if(nums[i]==a)
-            {
+            else if(nums[i]==a){
                 c++;
             }
             else{
