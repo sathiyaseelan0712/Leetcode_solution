@@ -1,8 +1,17 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        int a=0;
-        for (final int num  : nums)
-            a^=num;
-        return a;
+        Arrays.sort(nums);
+        int n=nums.length;
+        int a;
+        for(int i=0;i<n-2;i+=2){
+            if((nums[i]==nums[i+1])){
+                continue;
+            }
+            else{
+                return nums[i];
+            }
+        }
+        return nums[n-1];
+
     }
 }
