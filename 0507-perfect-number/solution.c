@@ -1,18 +1,10 @@
 bool checkPerfectNumber(int num) {
-    if (num <= 1)
-        return 0;; 
-    int sum = 1;
-    int s_num = (int)sqrt(num);
-    for (int i = 2; i <= s_num; ++i)
-    {
-        if (num % i == 0)
-        {
-            sum += i;  
-            if (i != num / i)
-            {
-            sum += num /i;
-            }
-        }
+    if(num==1){
+        return false;
     }
-    return sum == num;
+    int x=1;
+    for(int i=2;i<=num/2;i++){
+        if(num%i==0) x+=i;
+    }
+    return x==num;
 }
