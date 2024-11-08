@@ -1,23 +1,14 @@
 bool isAnagram(char* s, char* t) {
+    int m=strlen(s),n=strlen(t);
+    if(m!=n) return false;
+    int ans[26]={0};
     
-    if (strlen(s) != strlen(t)) {
-        return false;
+    for(int i=0;i<m;i++){
+        ans[s[i]-97]++;
+        ans[t[i]-97]--;
     }
-    
-    int countS[256] = {0};
-    int countT[256] = {0};
-    
-    for (int i = 0; s[i]!='\0' && t[i]!='\0'; i++) {
-        countS[s[i]]++;
-        countT[t[i]]++;
+    for(int i=0;i<26;i++){
+        if(ans[i]!=0)   return false;
     }
-    
-    for (int i = 0; i < 256; i++) {
-        if (countS[i] != countT[i]) {
-            return false;
-        }
-    }
-    
     return true;
 }
-    
