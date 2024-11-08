@@ -5,3 +5,4 @@ FROM Users u
 JOIN Register as r
 GROUP BY r.contest_id
 ORDER BY 2 DESC, 1 ASC
+
