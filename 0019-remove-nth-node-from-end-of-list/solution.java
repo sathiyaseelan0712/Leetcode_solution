@@ -1,39 +1,38 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 class Solution {
-    public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode start = new ListNode();
-        start.next = head;
-        ListNode fast = start;
-        ListNode slow = start;
-        ListNode cur = head;
-        int count = 0;
-        
-        // Count the total number of nodes in the list
-        while (cur != null) {
+    private int length(ListNode head){
+        ListNode temp = new ListNode();
+        temp = head;
+        int count =0;
+        while(temp!=null){
             count++;
-            cur = cur.next;
+            temp=temp.next;
         }
-        
-        // Move the fast pointer n steps ahead
-        for (int i = 0; i < n; i++) {
-            fast = fast.next;
-        }
-        
-        // If there's only one node in the list, return null
-        if (count == 1) {
+        return count;
+    }
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode temp = head;
+        int len = length(head);
+        int pos = len - n;
+        if(len == 1){
             return null;
         }
-        
-        // Move both pointers until the fast one reaches the end
-        while (fast.next != null) {
-            fast = fast.next;
-            slow = slow.next;
+        int cur = 1;
+        while(cur < pos){
+            temp = temp.next;
+            cur++;
         }
-        
-        // Remove the nth node from the end
-        slow.next = slow.next.next;
-        
-        // Return the modified head
-        return start.next;
+        if(len == n) head = head.next;
+        else temp.next = temp.next.next;
+        return head;     
     }
 }
-
