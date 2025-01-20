@@ -1,24 +1,22 @@
-bool isValid(char *s) {
-    char stack[100000]; 
-    int top = -1; 
-    int len = strlen(s);
-    for (int i = 0; i < len; i++) {
-        char a= s[i];
-        if (a== '(' || a == '{' || a == '[') {
-            stack[++top] = a;
-        } 
-        else {
-            if (top == -1) 
-                return false; 
-            char topel = stack[top--];
-            if (a == ')' && topel != '(')
+bool isValid(char* s) {
+    int top = -1;
+    int n = strlen(s);
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        char a = s[i];
+        if (a == '(' || a == '[' || a == '{') {
+            arr[++top] = a;
+        } else {
+            if (top == -1)
                 return false;
-            if (a == '}' && topel != '{') 
+            char b = arr[top--];
+            if (a == ')' && b != '(')
                 return false;
-            if (a == ']' && topel != '[')
+            else if (a == ']' && b != '[')
+                return false;
+            else if (a == '}' && b != '{')
                 return false;
         }
     }
-
     return top == -1;
 }
