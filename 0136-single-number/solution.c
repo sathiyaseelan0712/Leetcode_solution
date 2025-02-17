@@ -1,7 +1,7 @@
-int singleNumber(int* nums, int numsSize) {
-    int res=nums[0];
-    for(int i=1;i<numsSize;i++){
-        res = res ^ nums[i];
+int singleNumber(int* nums, int n) {
+    int ans =0;
+    for(int i=0;i<n;i++){
+        ans ^= nums[i];
     }
-    return res;
+    return ans;
 }
