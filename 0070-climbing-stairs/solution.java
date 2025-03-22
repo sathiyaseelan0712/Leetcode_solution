@@ -1,15 +1,13 @@
 class Solution {
-    public int solve(int n, Map<Integer,Integer> dp) {
-        if (n == 1 || n==2 ) return n;
-        else if (dp.containsKey(n)) return dp.get(n);
-        else {
-            dp.put(n, solve(n - 1, dp) + solve(n - 2, dp));
-            return dp.get(n);
-        }
+    public int solve(int n, Map<Integer,Integer> dp){
+        if(n == 1 || n == 2) return n;
+        else if(dp.containsKey(n)) return dp.get(n);
+        int value = solve(n-1,dp) + solve(n-2,dp);
+        dp.put(n,value);
+        return value;
     }
-
     public int climbStairs(int n) {
-        Map<Integer, Integer> dp = new HashMap<>();
-        return solve(n, dp);
+        Map<Integer,Integer> map = new HashMap<>();
+        return solve(n,map); 
     }
 }
