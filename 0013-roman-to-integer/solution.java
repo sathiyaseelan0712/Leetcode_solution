@@ -1,42 +1,35 @@
 class Solution {
-    public int romanToInt(String s) 
-    {
-        int ans = 0, num = 0;
-        int n=s.length();
-        for(int i=n-1;i>=0;i--)
-        {
-            switch(s.charAt(i))
-            {
-                case 'I' :
-                    num=1;
-                    break;
-                case 'V' :
-                    num=5;
-                    break;
-                case 'X' :
-                    num=10;
-                    break;
+    public int romanToInt(String s) {
+        int n = s.length();
+        int nums = 0, prev =0, ans = 0;
+        for(int i = n-1 ;i >= 0; i--){
+            switch(s.charAt(i)){
+                case 'I':
+                nums = 1;
+                break;
+                case 'V':
+                nums = 5;
+                break;
+                case 'X':
+                nums = 10;
+                break;
                 case 'L':
-                    num = 50;
-                    break;
-                case 'C' :
-                    num = 100;
-                    break;
-                case 'D' :
-                    num = 500;
-                    break;
-                case 'M' :
-                    num=1000;
-                    break;
+                nums = 50;
+                break;
+                case 'C':
+                nums = 100;
+                break;
+                case 'D':
+                nums = 500;
+                break;
+                case 'M':
+                nums = 1000;
+                break;
             }
-            if(4*num<ans)
-            {
-                ans-=num;
-            }
-            else
-            {
-                ans+=num;
-            }
+            if(nums < prev){
+                ans -= nums;
+            }else ans += nums;
+            prev = nums;
         }
         return ans;
     }
