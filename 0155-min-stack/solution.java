@@ -1,32 +1,34 @@
 class MinStack {
-
-    public List<int[]> stack;
-
+    private Stack<Integer> s;
+    private Stack<Integer> min;
     public MinStack() {
-        stack =new ArrayList();
+        s = new Stack();
+        min = new Stack();
     }
     
     public void push(int val) {
-        if(stack.size()==0){
-            stack.add(stack.size() , new int[]{val, val});
-            return;
+        s.push(val);
+        if(min.isEmpty() || val <= min.peek()){
+            min.push(val);
         }
-        int min=getMin();
-        stack.add(stack.size(),new int[]{val, Math.min(min,val)});
     }
-
     
     public void pop() {
-        stack.remove(stack.size()-1);
+        if(s.isEmpty()) return;
+        int popValue = s.pop();
+        if(popValue == min.peek()){
+            min.pop();
+        }
     }
     
     public int top() {
-        return stack.get(stack.size()-1)[0];
+        if(s.isEmpty()) return -1;
+        return s.peek();
     }
     
     public int getMin() {
-        return stack.get(stack.size()-1)[1];
-        
+        if(min.isEmpty()) return -1;
+        return min.peek();
     }
 }
 
