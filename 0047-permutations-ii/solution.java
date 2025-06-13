@@ -1,24 +1,24 @@
 class Solution {
-    public void backTrack(int[] nums, List<List<Integer>> list, List<Integer> temp, boolean[] used){
-        if(temp.size() == nums.length){
-            list.add(new ArrayList<>(temp));
+    public void backTrack(int[] nums, List<List<Integer>> res,List<Integer> cur,boolean[] used){
+        if(cur.size() == nums.length){
+            res.add(new ArrayList<>(cur));
             return;
         }
         for(int i = 0;i<nums.length;i++){
             if(used[i]) continue;
-            if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1]) continue;
-            temp.add(nums[i]);
+            if(i>0 && nums[i] == nums[i-1] && !used[i-1]) continue;
             used[i] = true;
-            backTrack(nums,list,temp,used);
+            cur.add(nums[i]);
+            backTrack(nums,res,cur,used);
+            cur.remove(cur.size()-1);
             used[i] = false;
-            temp.remove(temp.size() - 1);
         }
     }
     public List<List<Integer>> permuteUnique(int[] nums) {
-        List<List<Integer>> list = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
         Arrays.sort(nums);
         boolean[] used = new boolean[nums.length];
-        backTrack(nums,list, new ArrayList<>(),used);
-        return list;
+        backTrack(nums,res, new ArrayList<>(),used);
+        return res;
     }
 }
