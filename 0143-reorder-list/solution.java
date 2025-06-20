@@ -9,61 +9,51 @@
  * }
  */
 class Solution {
-    public void printList(ListNode root){
-        ListNode cur = root;
-        while(cur != null){
-            System.out.print(cur.val + " ");
-            cur = cur.next;
-        }
-        System.out.println();
-    }
-    public ListNode getMiddle(ListNode head){
-        ListNode  slow =head;
-        ListNode fast = head;
-        while(fast != null && fast.next != null){
+    public ListNode getMiddle(ListNode root) {
+        ListNode slow = root;
+        ListNode fast = root;
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
-        printList(slow);
+
         return slow;
     }
 
-    public ListNode reverseList(ListNode head){
+    public ListNode reverseList(ListNode root) {
+        ListNode temp = root;
         ListNode prev = null;
-        ListNode current = head;
-        ListNode next = null;
-
-        while (current != null) {
-            next = current.next;  
-            current.next = prev;  
-            prev = current;       
-            current = next;       
+        while (temp != null) {
+            ListNode cur = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = cur;
         }
-        printList(prev);
         return prev;
     }
 
-     public void mergeList(ListNode first, ListNode second){
+    public void merge(ListNode first, ListNode second) {
         while (first != null && second != null) {
-            ListNode firstNext = first.next;
-            ListNode secondNext = second.next;
+            ListNode firstNode = first.next;
+            ListNode secondNode = second.next;
 
             first.next = second;
 
-            if (firstNext == null) break; 
-            second.next = firstNext;
+            if (firstNode == null)
+                break;
+            second.next = firstNode;
 
-            first = firstNext;
-            second = secondNext;
+            first = firstNode;
+            second = secondNode;
+
         }
     }
 
     public void reorderList(ListNode head) {
         ListNode middle = getMiddle(head);
-          ListNode secondhalf = middle.next;
-          middle.next = null;
-          ListNode reverse = reverseList(secondhalf);
-          mergeList(head, reverse);
-    }
+        ListNode reverse = reverseList(middle.next);
+        middle.next = null;
 
+        merge(head, reverse);
+    }
 }
