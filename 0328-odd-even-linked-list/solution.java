@@ -10,21 +10,26 @@
  */
 class Solution {
     public ListNode oddEvenList(ListNode head) {
-        if (head == null || head.next == null) return head;
-
-        ListNode odd = head;
-        ListNode even = head.next;
-        ListNode evenHead = even;
-
-        while (even != null && even.next != null) {
-            odd.next = even.next;
-            odd = odd.next;
-
-            even.next = odd.next;
-            even = even.next;
+        if(head == null){
+            return null;
         }
-
-        odd.next = evenHead;
-        return head;
+        Queue<ListNode> q = new LinkedList<ListNode>();
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode temp = dummy.next;
+        while(temp  != null && temp.next != null){
+            q.add(temp.next);
+            temp.next = temp.next.next;
+            if(temp.next != null){
+                temp = temp.next;
+            }
+        }
+        while(!q.isEmpty()){
+            temp.next = q.poll();
+            temp = temp.next;
+        }
+        temp.next = null;
+        
+        return dummy.next;
     }
 }
