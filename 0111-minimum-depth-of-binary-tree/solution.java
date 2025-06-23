@@ -20,13 +20,12 @@ class Solution {
         queue.offer(root);
         int depth = 1;
         while(!queue.isEmpty()){
-            int size =queue.size();
-            while(size != 0){
+            int n =queue.size();
+            for(int i = 0;i<n;i++){
                 TreeNode cur = queue.poll();
                 if(cur.left == null && cur.right == null) return depth;
                 if(cur.left != null) queue.offer(cur.left);
                 if(cur.right != null) queue.offer(cur.right);
-                size--;
             }
             depth++;
         }
