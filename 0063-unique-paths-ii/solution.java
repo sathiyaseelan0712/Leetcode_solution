@@ -1,29 +1,17 @@
 class Solution {
-    public int solve(int i, int j, Map<String, Integer> dp, int m, int n, int[][] o) {
-        if (j >= m || i >= n)
-            return 0;
-        if (o[i][j] == 1)
-            return 0;
-        if (i == n - 1 && j == m - 1)
-            return 1;
-
-        String key = i + " " + j;
-
-        if (dp.containsKey(key)) {
-            return dp.get(key);
-        }
-        int val = solve(i + 1, j, dp, m, n, o) + solve(i, j + 1, dp, m, n, o);
-        dp.put(key, val);
-        return val;
+    public int solve(int[][] arr, int m ,int n, int i,int j,int[][] dp){
+        if(i >= m || j >= n || arr[i][j] == 1) return 0;
+        if(i == m-1 && j == n-1) return 1;
+        if(dp[i][j] != -1) return dp[i][j];
+        return dp[i][j] = solve(arr,m,n,i+1,j,dp) + solve(arr,m,n,i,j+1,dp);
     }
-
-    public int uniquePathsWithObstacles(int[][] o) {
-        Map<String, Integer> dp = new HashMap<>();
-        int x = 0, y = 0;
-        int n = o.length;
-        int m = o[0].length;
-        if (o[0][0] == 1 || o[n-1][m-1] == 1 )
-            return 0;
-        return solve(0, 0, dp, m, n, o);
+    public int uniquePathsWithObstacles(int[][] arr) {
+        int m = arr.length;
+        int n = arr[0].length;
+        int[][] dp = new int[m][n];
+        for(int[] row : dp){
+            Arrays.fill(row,-1);
+        }
+        return solve(arr,m,n,0,0,dp);
     }
 }
