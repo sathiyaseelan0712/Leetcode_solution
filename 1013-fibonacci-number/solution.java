@@ -1,14 +1,19 @@
 class Solution {
-    public int solve(int n,int[] arr){
-        if(n==0 || n==1) return n;
-        else if(arr[n] != -1) return arr[n];
-        else return arr[n] = solve(n-1,arr) + solve(n-2,arr);
-    }
+    // public int solve(int[][] dp,int n ){
+    //     if( n > 2 ) return 
+    // }
     public int fib(int n) {
-        int[] arr = new int[n+1];
-        for(int i = 0;i<n+1;i++){
-            arr[i] = -1;
+        if(n < 2) return n;
+
+        int a = 0;
+        int b = 1;
+
+        for(int i = 2; i<=n;i++){
+            int temp =a +b
+            ;
+            a= b;
+            b= temp;
         }
-        return solve(n,arr);
+        return b;
     }
 }
