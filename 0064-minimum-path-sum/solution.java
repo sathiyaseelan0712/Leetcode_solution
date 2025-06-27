@@ -1,18 +1,21 @@
 class Solution {
-    public int solve(int i, int j,int m,int n,Map<String,Integer> dp,int[][] g){
-        String key = i + " " + j;
-        if(i>=n || j>=m) return Integer.MAX_VALUE;
-        if( i== n-1 && j==m-1) return g[i][j];
-        if(dp.containsKey(key)) return dp.get(key);
-        int val= g[i][j]+Math.min(solve(i+1,j,m,n,dp,g) , solve(i,j+1,m,n,dp,g));
-        dp.put(key,val);
+    private int[][] dp;
+    public int solve(int[][] grid, int m,int n,int i,int j){
+        if(i < 0 || j < 0 || i>= m || j >= n) return Integer.MAX_VALUE;
+        if(i == m-1 && j == n-1) return grid[i][j];
+        if(dp[i][j] != -1) return dp[i][j];
+        int val = grid[i][j] + Math.min(solve(grid,m,n,i+1,j), solve(grid,m,n,i,j+1));
+        dp[i][j] = val;
         return val;
     }
     public int minPathSum(int[][] grid) {
-        int n=grid.length;
-        int m=grid[0].length;
-        Map<String,Integer> dp = new HashMap<>();
-        return solve(0,0,m,n,dp,grid);
-
+        int m = grid.length;
+        int n = grid[0].length;
+        dp = new int[grid.length][grid[0].length];
+        for(int[] row  : dp){
+            Arrays.fill(row,-1);
+        }
+        return solve(grid,m,n,0,0);
+        // return dp[m-1][n-1];
     }
 }
