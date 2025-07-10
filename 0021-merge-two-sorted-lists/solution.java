@@ -10,28 +10,53 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        if(list1== null)return list2;
-        if(list2==null)return list1;
-        if(list1.val>list2.val)
-        {
-            ListNode tem=list1;
-            list1=list2;
-            list2=tem;
-        }
-        ListNode res=list1;
-        while(list1!=null &&list2!=null)
-        {
-            ListNode temp =null;
-            while(list1!=null && list1.val <= list2.val)
-            {
-                temp=list1;
-                list1=list1.next;
+        ListNode temp1 = list1;
+        ListNode temp2 = list2;
+        ListNode ansHead = null;
+        ListNode ansCur = null;
+
+        while (temp1 != null && temp2 != null) {
+            if (temp1.val < temp2.val) {
+                if (ansHead == null) {
+                    ansHead = temp1;
+                    ansCur = temp1;
+                } else {
+                    ansCur.next = temp1;
+                    ansCur = temp1;
+                }
+                temp1 = temp1.next;
+            } else {
+                if (ansHead == null) {
+                    ansHead = temp2;
+                    ansCur = temp2;
+                } else {
+                    ansCur.next = temp2;
+                    ansCur = temp2;
+                }
+                temp2 = temp2.next;
             }
-            temp.next=list2;
-            ListNode temp1=list1;
-            list1=list2;
-            list2=temp1;
         }
-        return res;
+        while (temp1 != null) {
+            if (ansHead == null) {
+                ansHead = temp1;
+                ansCur = temp1;
+            } else {
+                ansCur.next = temp1;
+                ansCur = temp1;
+            }
+            temp1 = temp1.next;
+        }
+
+        while (temp2 != null) {
+            if (ansHead == null) {
+                ansHead = temp2;
+                ansCur = temp2;
+            } else {
+                ansCur.next = temp2;
+                ansCur = temp2;
+            }
+            temp2 = temp2.next;
+        }
+        return ansHead;
     }
 }
