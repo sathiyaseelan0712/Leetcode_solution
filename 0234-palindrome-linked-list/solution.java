@@ -9,89 +9,48 @@
  * }
  */
 class Solution {
-    public ListNode middle(ListNode head){
-        ListNode slow = head;
-        ListNode fast = head;
-
+    public ListNode getmiddle(ListNode root){
+        ListNode fast = root;
+        ListNode slow = root;
         while(fast != null && fast.next != null){
-            slow = slow.next;
             fast = fast.next.next;
+            slow = slow.next;
         }
-
         return slow;
-    }
+    } 
     public ListNode reverse(ListNode root){
-        ListNode prev = null;
         ListNode temp = root;
-
+        ListNode prev = null;
         while(temp != null){
-            ListNode cur = null;
-            cur = temp.next;
-            temp.next = prev;
-            prev = temp;
-            temp = cur;
+            ListNode cur = temp;
+            temp = temp.next;
+            cur.next = prev;
+            prev = cur;
         }
-
         return prev;
-
     }
     public void printList(ListNode root){
         ListNode cur = root;
         while(cur != null){
-            System.out.print(cur.val + "->");
+            System.out.print(cur.val + " ");
             cur =cur.next;
         }
-    } 
-
-    private ListNode front;
-    public boolean isPalindrome(ListNode head) {
-        // ListNode lastHalf = middle(head);
-        // ListNode reverseList = reverse(lastHalf);
-        
-        // ListNode temp = reverseList;
-        // ListNode temp2 = head;
-        // while(temp != null && temp2 != null){
-        //     if(temp.val != temp2.val){
-        //         return false;
-        //     }
-        //     temp = temp.next;
-        //     temp2 = temp2.next;
-        // }
-
-        // Stack<Integer> s = new Stack();
-        // ListNode temp = head;
-
-        // while(temp != null){
-        //     s.push(temp.val);
-        //     temp = temp.next;
-        // }        
-
-        // temp = head;
-
-        // while(temp != null){
-        //     if(s.peek() != temp.val){
-        //         return false;
-        //     }
-        //     s.pop();
-        //     temp = temp.next;
-        // }
-
-        // return true;
-        front = head;
-        return check(head);
+        System.out.println();
     }
-
-    public boolean check(ListNode cur){
-        if(cur == null) return true;
-
-        boolean isPal = check(cur.next);
-
-        if(!isPal) return false;
-
-        if(cur.val != front.val) return false;
-
-        front = front.next;
-
+    public boolean isPalindrome(ListNode head) {
+        ListNode middle = getmiddle(head);
+        ListNode rev = reverse(middle);
+        // printList(rev);
+        middle.next = null;
+        ListNode temp = rev;
+        ListNode temp2 = head;
+        while(temp != null && temp2 !=null){
+            if(temp.val != temp2.val){
+                return false;
+            }
+            temp  = temp.next;
+            temp2 = temp2.next;
+        }
         return true;
     }
 }
