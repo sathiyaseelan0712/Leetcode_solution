@@ -23,12 +23,12 @@ public class Solution {
         int lenA = length(headA);
         int lenB = length(headB);
 
-        while(lenA> lenB){
+        while(lenA > lenB){
             headA = headA.next;
             lenA--;
         }
 
-        while(lenB > lenA){
+        while(lenA < lenB){
             headB = headB.next;
             lenB--;
         }
@@ -37,6 +37,7 @@ public class Solution {
             headA = headA.next;
             headB = headB.next;
         }
+
         return headA;
     }
 }
