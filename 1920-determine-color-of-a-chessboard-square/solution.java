@@ -1,9 +1,7 @@
 class Solution {
-    public boolean squareIsWhite(String co) {
-        int val = 0;
-        val += co.charAt(0) - 'a' + 1;
-        val += co.charAt(1) - '0' ;
-        if((val&1) == 0) return false;
-        return true;
+    public boolean squareIsWhite(String coordinates) {
+        int a = coordinates.charAt(1);
+        int b = coordinates.charAt(0) - 97;
+        return (a + b)  % 2 == 0;
     }
 }
