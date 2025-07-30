@@ -1,21 +1,19 @@
 class Solution {
-    public void backTrack(List<Integer> cur,List<List<Integer>> res, int[] nums){
-        if(cur.size() == nums.length){
-            res.add(new ArrayList<>(cur));
+    private List<List<Integer>> ans = new ArrayList<>();
+    public void solve(int[] nums,List<Integer> list){
+        if(list.size() == nums.length){
+            ans.add(new ArrayList<>(list));
+            return;
         }
         for(int i = 0;i<nums.length;i++){
-            if(cur.contains(nums[i]))continue;
-            cur.add(nums[i]);
-            backTrack(cur,res,nums);
-            cur.remove(cur.size()-1);
+            if(list.contains(nums[i])) continue;
+            list.add(nums[i]);
+            solve(nums,list);
+            list.remove(list.size()-1);
         }
     }
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> cur = new ArrayList<>();
-
-        backTrack(cur, res, nums);
-
-        return res;
+        solve(nums, new ArrayList<>());
+        return ans;
     }
 }
